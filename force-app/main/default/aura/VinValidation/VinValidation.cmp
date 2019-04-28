@@ -1,3 +1,10 @@
-<aura:component>
-
-</aura:component>	
+<aura:component controller="VinController">
+    <aura:attribute name="vinNumber" type="string" />
+    <aura:attribute name="year" type="string" />
+    <aura:attribute name="response" type="Map" />
+    <form class="slds-form--stacked">
+        <lightning:input name="vinNumberInput" label="Vin number to analize" placeholder="type the Vin Number" value="{!v.vinNumber}" />
+        <lightning:input name="yearInput" label="Year Model" placeholder="type the year" value="{!v.year}" />
+        <lightning:button label="Validate Vin" class="slds-m-top--medium" onclick="{!c.validate}" />
+    </form>
+</aura:component>
