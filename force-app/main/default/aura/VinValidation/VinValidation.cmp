@@ -1,10 +1,14 @@
-<aura:component controller="VinController">
-    <aura:attribute name="vinNumber" type="string" />
-    <aura:attribute name="year" type="string" />
+<aura:component controller="VinController" implements="force:appHostable,force:lightningQuickAction,flexipage:availableForRecordHome,force:hasRecordId" access="global">
+
     <aura:attribute name="response" type="Map" />
-    <form class="slds-form--stacked">
-        <lightning:input name="vinNumberInput" label="Vin number to analize" placeholder="type the Vin Number" value="{!v.vinNumber}" />
-        <lightning:input name="yearInput" label="Year Model" placeholder="type the year" value="{!v.year}" />
-        <lightning:button label="Validate Vin" class="slds-m-top--medium" onclick="{!c.validate}" />
-    </form>
+    <aura:attribute name="record" type="Object" description="The record object to be displayed" />
+    <aura:attribute name="OpptyRecord" type="Object" description="A simplified view record object to be displayed" />
+    <aura:attribute name="recordError" type="String" description="An error message bound to force:recordData" />
+    <force:recordData aura:id="record" layoutType="FULL" recordId="{!v.recordId}" targetError="{!v.recordError}" targetRecord="{!v.record}" targetFields="{!v.OpptyRecord }" mode="VIEW" />
+
+    <aura:handler name="init" value="{!this}" action="{!c.validate}" />
+
+
+
+
 </aura:component>
