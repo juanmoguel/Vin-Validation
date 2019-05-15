@@ -10,6 +10,8 @@
                 var vinYear = response.Year__c;
                 console.debug("datos son:" + vinNumber + vinYear);
                 helper.getValidation(component, vinNumber, vinYear, recordId);
+
+                $A.get('e.force:refreshView').fire();
             }
         );
 
