@@ -1,6 +1,10 @@
 public with sharing class VinController {
     @AuraEnabled
-   public static List<ObjectManagement.validationObject> getCarInformation(String url,String vinNumber,String oppId) {
+   public static String getCarInformation(String url,String vinNumber,String oppId) {
+       if(String.isBlank(vinNumber)==TRUE){
+           ResultsFunctions.updateOppStatus(oppId,false);
+           return null;
+       }
         Http h= new Http();
         HttpRequest req= new HttpRequest();
         req.setEndpoint(url);
@@ -22,7 +26,7 @@ public with sharing class VinController {
         System.debug('-------- resultado con nuevo objecto: '+vinObjectList);
         
        
-		return vinObjectList;
+		return res.getBody();
     }
 
     

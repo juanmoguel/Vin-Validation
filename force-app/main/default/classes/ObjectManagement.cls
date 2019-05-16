@@ -31,13 +31,13 @@ public with sharing class ObjectManagement {
 
 
         ResultsFunctions.updateOppStatus(oppId,vinFound);
-        openClass(objectToInsert, vinFound,oppId,vinNumber);
+       VinValidationObject obj= openClass(objectToInsert, vinFound,oppId,vinNumber);
 
-      
+      ResultsFunctions.insertValidationObject(vinFound,obj);
         
     }
 
-    public static void openClass(List<validationObject> objectToInsert,Boolean vinFound,String oppId,String vinNumber){
+    public static VinValidationObject openClass(List<validationObject> objectToInsert,Boolean vinFound,String oppId,String vinNumber){
         Decimal bedLenght=null;
         Integer doors=null;
         Integer seats=null;
@@ -175,10 +175,12 @@ public with sharing class ObjectManagement {
          
 
         VinValidationObject theObject= new VinValidationObject(bedLenght,cylinder,doors,driveType,engineModel,fuelType,make,manufacter,model,modelYear,seats,oppId,series,type,name,windows);
+       return theObject;
+
         
-        ResultsFunctions.insertValidationObject(vinFound,theObject);
     }
 
+    @TestVisible
     public class validationObject{
         public validationObject(String variable,String value){
             attribute=variable;
