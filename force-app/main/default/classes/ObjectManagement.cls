@@ -31,9 +31,11 @@ public with sharing class ObjectManagement {
 
 
         ResultsFunctions.updateOppStatus(oppId,vinFound);
+        
        VinValidationObject obj= openClass(objectToInsert, vinFound,oppId,vinNumber);
-
+       
       ResultsFunctions.insertValidationObject(vinFound,obj);
+      ResultsFunctions.upsertModel(oppId, obj, vinFound);
         
     }
 

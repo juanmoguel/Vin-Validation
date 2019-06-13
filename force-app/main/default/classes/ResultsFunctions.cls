@@ -88,4 +88,27 @@ public with sharing  class ResultsFunctions {
         }
 
     }
+
+    public static void upsertModel(String recordId,VinValidationObject vo,Boolean wasFound){
+        String model;
+        Opportunity opp =[SELECT Id,Model__c from Opportunity where Id=:recordId];
+            if(opp.Model__c==null){
+                if(wasFound==TRUE){
+                    System.debug('entro was found true');
+                            model=vo.model;                           
+                
+
+                    Model__c [] md= [Select Id from Model__c where Name=:model];
+                    if(md.size()>0){
+                        opp.Model__c=md[0].Id;           
+                        update opp; 
+                    }
+                    
+                }
+                else{
+                    System.debug('entro was found false');
+                
+                } 
+            }
+    }
 }
